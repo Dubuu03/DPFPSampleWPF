@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using System.Windows.Media.Animation;
 
 namespace DPFPSampleWPF
@@ -21,6 +20,19 @@ namespace DPFPSampleWPF
         public MainWindow()
         {
             InitializeComponent();
+            MainContent.Navigate(new RegisterPage());
+        }
+
+        // Helper method to reset button background
+        private void ResetButtonBackgrounds()
+        {
+            BtnHome.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnAttendance.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnRegister.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnManage.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnRecords.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnLog.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
+            BtnSettings.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#313B44"));
         }
 
         private void MenuIcon_Click(object sender, RoutedEventArgs e)
@@ -34,26 +46,31 @@ namespace DPFPSampleWPF
 
         private void BtnHome_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonBackgrounds(); // Reset background for all buttons
+            BtnHome.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56aeff"));
             MainContent.Content = null; // Clears the frame
         }
 
         private void BtnAttendance_Click(object sender, RoutedEventArgs e)
         {
-            // Navigate to AttendancePage
+            ResetButtonBackgrounds(); // Reset background for all buttons
+            BtnAttendance.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56aeff"));
             MainContent.Navigate(new AttendancePage());
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            BtnRegister.Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#56aeff"));
-
-            // Navigate to RegisterPage
+            ResetButtonBackgrounds(); // Reset background for all buttons
+            BtnRegister.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56aeff"));
             MainContent.Navigate(new RegisterPage());
         }
 
         // Manage Students button click
         private void BtnManage_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonBackgrounds(); // Reset background for all buttons
+            BtnManage.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56aeff"));
+
             var loginWnd = new AdminLoginWindow(requireAdmin: false)  // accept admin or student
             {
                 Owner = this,
@@ -74,14 +91,11 @@ namespace DPFPSampleWPF
             }
         }
 
-
-        private void MainContent_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            // Optional: handle navigation events if needed
-        }
-
         private void BtnSettings_Click(object sender, RoutedEventArgs e)
         {
+            ResetButtonBackgrounds(); // Reset background for all buttons
+            BtnSettings.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#56aeff"));
+
             // Open the login window with requireAdmin = true
             var loginWnd = new AdminLoginWindow(requireAdmin: true)
             {
@@ -98,6 +112,5 @@ namespace DPFPSampleWPF
                 MessageBox.Show("Only admin can access Settings.");
             }
         }
-
     }
 }

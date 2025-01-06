@@ -58,7 +58,7 @@
         <StackPanel x:Name="PanelSidebar"
                     Width="220"
                     DockPanel.Dock="Left"
-                    Background="{StaticResource SidebarBrush}">
+                    Background="#FF313B44">
 
             <!-- Top empty area / space for a potential logo or spacing -->
             <Border Height="100" Background="Transparent"/>
@@ -181,19 +181,19 @@
                 <Grid>
                     <Canvas>
                         <!-- More dramatic wave shape: higher peaks -->
-                        <Path Fill="{StaticResource TopBarBrush}"
+                        <Path Fill="#FF313B44"
                               Data="M0,120 
                                     C250,30  550,200  700,60 
                                     C850,0   1050,150 1100,0 
                                     L1100,0  L1100,0  L0,0 Z"/>
                     </Canvas>
                     <TextBlock Text="ThumbTrack: Attendance Monitoring System"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
                                FontSize="24"
                                FontWeight="Bold"
                                Foreground="White"
-                               Margin="0,0,0,15"/>
+                               Margin="118,34,0,0"/>
                 </Grid>
             </Border>
 

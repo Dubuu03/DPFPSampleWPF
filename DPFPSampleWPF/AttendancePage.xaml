@@ -70,5 +70,7 @@
                   Height="160">
             <ListBox x:Name="lstNotLoggedIn"/>
         </GroupBox>
+        <Label x:Name="TodayEventLabel" Content="Today's Event:" HorizontalAlignment="Left" Height="28" Margin="405,42,0,0" VerticalAlignment="Top" Width="285"/>
+
     </Grid>
 </Page>

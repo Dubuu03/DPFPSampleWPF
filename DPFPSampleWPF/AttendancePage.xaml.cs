@@ -40,6 +40,8 @@ namespace DPFPSampleWPF
 
             // Load “not logged in” students on page load
             LoadNotLoggedInStudents();
+
+            GetTodaysEvent();
         }
 
         private void AttendancePage_Unloaded(object sender, RoutedEventArgs e)
@@ -78,7 +80,40 @@ namespace DPFPSampleWPF
                 MessageBox.Show("Could not initialize fingerprint capture: " + ex.Message);
             }
         }
+        private void GetTodaysEvent()
+        {
+            // The query to get today's event. Assuming you have a table named `events` with a date column `event_date`
+            string query = "SELECT event_name FROM event WHERE CURDATE() BETWEEN event_start_date AND event_end_date;";
 
+            try
+            {
+                using (var conn = new MySqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        var result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            // Display the event name in the label
+                            TodayEventLabel.Content = "Today's Event: " + result.ToString();
+                        }
+                        else
+                        {
+                            // If there's no event today, show a default message
+                            TodayEventLabel.Content = "No event today.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle any errors
+                MessageBox.Show("Error fetching event: " + ex.Message);
+            }
+        }
         private void btnStartCapture_Click(object sender, RoutedEventArgs e)
         {
             StartCapture();
