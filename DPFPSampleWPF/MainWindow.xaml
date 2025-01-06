@@ -1,0 +1,205 @@
+﻿<Window x:Class="DPFPSampleWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ThumbTrack: Attendance Monitoring System"
+        Width="1100"
+        Height="700"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Sidebar uses a stronger gradient for a more “wonderful” effect -->
+        <LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#6488FE" Offset="0.0"/>
+            <GradientStop Color="#3653D2" Offset="0.4"/>
+            <GradientStop Color="#283FA8" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <!-- Top bar wave uses a slightly different or more intense gradient -->
+        <LinearGradientBrush x:Key="TopBarBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#647CFE" Offset="0.0"/>
+            <GradientStop Color="#4559D3" Offset="1.0"/>
+        </LinearGradientBrush>
+
+        <!-- Larger icons, bigger text, and stronger hover color -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="15,20,0,20"/>
+            <!-- Adjusted padding for button height -->
+            <Setter Property="MinHeight" Value="50"/>
+            <!-- Ensures buttons have consistent height -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Background" 
+                                        Value="#4D5ED3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <!-- Left sidebar -->
+        <StackPanel x:Name="PanelSidebar"
+                    Width="220"
+                    DockPanel.Dock="Left"
+                    Background="{StaticResource SidebarBrush}">
+
+            <!-- Top empty area / space for a potential logo or spacing -->
+            <Border Height="100" Background="Transparent"/>
+
+            <!-- Home button -->
+            <Button x:Name="BtnHome"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="BtnHome_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Width="26" Height="26">
+                        <!-- Slightly bigger icons -->
+                        <Canvas Width="26" Height="26">
+                            <Image Width="30" Height="26" 
+                                   Source="/Home.png" Margin="10,0,0,0"/>
+                            <!-- Added left margin -->
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock Text="  Home" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Attendance button -->
+            <Button x:Name="BtnAttendance"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="BtnAttendance_Click">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Viewbox Width="26" Height="26">
+                        <Canvas Width="26" Height="26">
+                            <Image Width="26" Height="25.9" 
+                                   Source="/fingerprint.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <!-- Added left margin -->
+                        </Canvas>
+                    </Viewbox>
+
+                    <TextBlock Text="  Attendance"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="BtnRegister"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="BtnRegister_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Width="26" Height="26" Margin="10,0,0,0">
+                        <Canvas Width="26" Height="26">
+                            <Image Width="26" Height="26" 
+                                   Source="/add.png"/>
+                            <!-- Added left margin -->
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock Text="  Register Student"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Register Student -->
+
+            <!-- Manage Students -->
+            <Button x:Name="BtnManage"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="BtnManage_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Width="26" Height="26" Margin="10,0,0,0">
+                        <Image Width="25" Height="26" 
+                               Source="/database.png" Stretch="UniformToFill"/>
+                        <!-- Added left margin -->
+                    </Viewbox>
+                    <TextBlock Text="  Manage Students" Width="141"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Records -->
+            <Button x:Name="BtnRecords"
+                    Style="{StaticResource NavButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Width="26" Height="26" Margin="9.9,0,0,0">
+                        <Image Width="26" Height="26" 
+                               Source="/folder.png" Margin="-0.4,0,0,0"/>
+                        <!-- Added left margin -->
+                    </Viewbox>
+                    <TextBlock Text="  Records"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Log Attendance -->
+            <Button x:Name="BtnLog"
+                    Style="{StaticResource NavButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <Viewbox Width="26" Height="26">
+                        <Canvas Width="26" Height="26">
+                            <Image Width="26" Height="26" 
+                                   Source="/check.png"
+                                   Margin="10,0,0,0"/>
+                            <!-- Added left margin -->
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock Text="  Log Attendance" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Settings -->
+            <Button x:Name="BtnSettings"
+                    Style="{StaticResource NavButtonStyle}"
+                    Click="BtnSettings_Click">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <Viewbox Width="26" Height="26">
+                        <Image Width="26" Height="26" 
+                               Source="/settings.png"
+                               Margin="5,0,0,0"/>
+                    </Viewbox>
+                    <TextBlock Text="  Settings"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+        <!-- Top bar + wave shape + content -->
+        <DockPanel LastChildFill="True">
+            <!-- Increase height for wave area so text is more readable -->
+            <Border DockPanel.Dock="Top"
+                    Height="120"
+                    Padding="0">
+                <Grid>
+                    <Canvas>
+                        <!-- More dramatic wave shape: higher peaks -->
+                        <Path Fill="{StaticResource TopBarBrush}"
+                              Data="M0,120 
+                                    C250,30  550,200  700,60 
+                                    C850,0   1050,150 1100,0 
+                                    L1100,0  L1100,0  L0,0 Z"/>
+                    </Canvas>
+                    <TextBlock Text="ThumbTrack: Attendance Monitoring System"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Margin="0,0,0,15"/>
+                </Grid>
+            </Border>
+
+            <!-- Main frame -->
+            <Frame x:Name="MainContent"
+                   NavigationUIVisibility="Hidden"/>
+        </DockPanel>
+    </DockPanel>
+</Window>

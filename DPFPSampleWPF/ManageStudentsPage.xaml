@@ -1,0 +1,162 @@
+﻿<Page x:Class="DPFPSampleWPF.ManageStudentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Manage Students">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <!-- Row 0: The Admin DataGrid (hidden if Student) -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 1: The student fields -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 2: The optional 'Change Password' panel -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- (Row 0) Admin table -->
+        <DataGrid x:Name="dgAccounts"
+                  Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="False"
+                  Margin="0,0,0,10"
+                  Visibility="Collapsed">
+
+            <DataGrid.Columns>
+                <!-- ID col (Hidden) -->
+                <DataGridTextColumn Header="ID" Binding="{Binding id}" Visibility="Hidden"/>
+
+                <DataGridTextColumn Header="Student ID" Binding="{Binding student_id}" Width="*"/>
+                <DataGridTextColumn Header="Name"       Binding="{Binding name}"       Width="*" />
+                <DataGridTextColumn Header="Course"     Binding="{Binding course}"     Width="*" />
+                <DataGridTextColumn Header="Year"       Binding="{Binding year}"       Width="*" />
+                <DataGridTextColumn Header="Status"     Binding="{Binding status}"     Width="*" />
+
+                <!-- Edit button -->
+                <DataGridTemplateColumn Header="Edit" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit"
+                                    Margin="2"
+                                    Click="BtnEdit_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Delete button -->
+                <DataGridTemplateColumn Header="Delete" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete"
+                                    Margin="2"
+                                    Click="BtnDelete_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- (Row 1) Student “Manage Your Account” fields -->
+        <StackPanel x:Name="panelStudent"
+                    Grid.Row="1"
+                    Visibility="Collapsed"
+                    Orientation="Vertical">
+            <TextBlock Text="Manage Your Account"
+                       FontWeight="Bold"
+                       Margin="0,0,0,10"/>
+
+            <!-- Student ID row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Student ID:" Width="100"/>
+                <TextBox x:Name="txtStudentID" Width="200" IsReadOnly="True"/>
+            </StackPanel>
+
+            <!-- Name row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Name:" Width="100"/>
+                <TextBox x:Name="txtName" Width="200"/>
+            </StackPanel>
+
+            <!-- Course row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Course:" Width="100"/>
+                <TextBox x:Name="txtCourse" Width="200"/>
+            </StackPanel>
+
+            <!-- Year row -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Year:" Width="100"/>
+                <TextBox x:Name="txtYear" Width="200"/>
+            </StackPanel>
+
+            <!-- Password row, with “Change Password” on the right -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Password:" Width="100"/>
+                <PasswordBox x:Name="txtPassword"
+                             Width="200"
+                             IsEnabled="False"/>
+                <Button x:Name="btnChangePassword"
+                        Content="Change Password"
+                        Width="120"
+                        Margin="15,0,0,0"
+                        Click="btnChangePassword_Click"/>
+            </StackPanel>
+
+            <!-- Save button below everything -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Button x:Name="btnSaveStudent"
+                        Content="Save"
+                        Width="80"
+                        Click="btnSaveStudent_Click"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- (Row 2) “Change Password” panel, hidden by default -->
+        <StackPanel x:Name="panelChangePassword"
+                    Grid.Row="2"
+                    Orientation="Vertical"
+                    Visibility="Collapsed"
+                    Margin="0,8,0,0">
+
+            <TextBlock Text="Change Password"
+                       FontWeight="Bold"
+                       Margin="0,0,0,8"/>
+
+            <!-- Old Password -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="Old Password:"
+                           Width="100"/>
+                <PasswordBox x:Name="txtOldPassword"
+                             Width="200"/>
+            </StackPanel>
+
+            <!-- New Password -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                <TextBlock Text="New Password:"
+                           Width="100"/>
+                <PasswordBox x:Name="txtNewPassword"
+                             Width="200"/>
+            </StackPanel>
+
+            <!-- Confirm Password -->
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,10">
+                <TextBlock Text="Confirm Password:"
+                           Width="100"/>
+                <PasswordBox x:Name="txtConfirmPassword"
+                             Width="200"/>
+            </StackPanel>
+
+            <!-- “Save New Password” aligned same as “Change Password” above -->
+            <StackPanel Orientation="Horizontal">
+                <!-- blank space same width as label + password box => 300 total maybe -->
+                <FrameworkElement Width="300"/>
+                <Button x:Name="btnSaveNewPassword"
+                        Content="Save New Password"
+                        Width="120"
+                        Margin="15,0,0,0"
+                        Click="btnSaveNewPassword_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
